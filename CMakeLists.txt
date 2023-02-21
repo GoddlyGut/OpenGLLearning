@@ -5,11 +5,13 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
         src/main.cpp
-        glad.c includes/opengllearning/filesystem.h stb_image.cpp)
+        glad.c
+        stb_image.cpp)
 
 find_package(OpenGL REQUIRED)
 
 add_subdirectory(includes/glfw-3.3.8)
+add_subdirectory(includes/glm)
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
 
@@ -22,7 +24,7 @@ endif()
 
 add_executable(OpenGLLearning ${SOURCE_FILES})
 
-target_link_libraries(OpenGLLearning ${OPENGL_LIBRARIES} glfw)
+target_link_libraries(OpenGLLearning ${OPENGL_LIBRARIES} glfw glm)
 
 
 add_custom_target(copy_resources ALL
