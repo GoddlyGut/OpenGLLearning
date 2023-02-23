@@ -167,6 +167,7 @@ int main()
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         lightingShader.setMat4("view", view);
         lightingShader.setMat4("projection", projection);
+        lightingShader.setVec3("viewPos", camera.Position);
 
         glm::mat4 model = glm::mat4(1.0f);
         lightingShader.setMat4("model", model);
