@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES
         src/main.cpp
-        glad.c
-        stb_image.cpp)
+        src/glad.c
+        src/stb_image.cpp)
 
 find_package(OpenGL REQUIRED)
 
