@@ -67,7 +67,7 @@ int main()
     glEnable(GL_DEPTH_TEST);
 
 
-    Shader lightingShader(FileSystem::getPath("shaders/lighting_shader.vert").c_str(), FileSystem::getPath("shaders/lighting_shader.frag").c_str()); // you can name your shader files however you like
+    Shader lightingShader(FileSystem::getPath("shaders/material.vert").c_str(), FileSystem::getPath("shaders/material.frag").c_str()); // you can name your shader files however you like
     Shader lightCubeShader(FileSystem::getPath("shaders/light_cube.vert").c_str(), FileSystem::getPath("shaders/light_cube.frag").c_str());
 
     float vertices[] = {
@@ -168,6 +168,11 @@ int main()
 
         glm::mat4 model = glm::mat4(1.0f);
         lightingShader.setMat4("model", model);
+
+        lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+        lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        lightingShader.setFloat("material.shininess", 32.0f);
 
 
         glBindVertexArray(cubeVAO);
