@@ -4,12 +4,15 @@ project(OpenGLLearning)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
+
 set(SOURCE_FILES
         src/main.cpp
         src/glad.c
         src/stb_image.cpp)
 
 find_package(OpenGL REQUIRED)
+find_package(ASSIMP REQUIRED)
 
 FetchContent_Declare(
         glfw
@@ -26,6 +29,7 @@ FetchContent_MakeAvailable(glfw glm)
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
 
+
 include_directories(includes ${CMAKE_BINARY_DIR}/configuration)
 
 if(WIN32)
@@ -35,7 +39,7 @@ endif()
 
 add_executable(OpenGLLearning ${SOURCE_FILES})
 
-target_link_libraries(OpenGLLearning glfw glm)
+target_link_libraries(OpenGLLearning glfw glm ${ASSIMP_LIBRARIES})
 
 
 add_custom_target(copy_resources ALL
