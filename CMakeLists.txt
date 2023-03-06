@@ -54,4 +54,11 @@ add_custom_target(copy_shaders ALL
         ${PROJECT_BINARY_DIR}/shaders
         COMMENT "Copying shaders into binary directory")
 
-add_dependencies(OpenGLLearning copy_resources copy_shaders)
+add_custom_target(copy_dlls ALL 
+        COMMAND ${CMAKE_COMMAND} -E copy_directory 
+        ${PROJECT_SOURCE_DIR}/dlls
+        ${PROJECT_BINARY_DIR}
+        COMMENT "Copying dlls into binary directory")
+
+
+add_dependencies(OpenGLLearning copy_resources copy_shaders copy_dlls)
