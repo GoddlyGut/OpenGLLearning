@@ -12,21 +12,14 @@ set(SOURCE_FILES
         src/glad.c
         src/stb_image.cpp)
 
-find_package(OpenGL REQUIRED)
+link_directories(${CMAKE_SOURCE_DIR}/lib)
+
+find_package(GLM REQUIRED)
+message(STATUS "GLM included at ${GLM_INCLUDE_DIR}")
+find_package(GLFW3 REQUIRED)
+message(STATUS "Found GLFW3 in ${GLFW3_INCLUDE_DIR}")
 find_package(ASSIMP REQUIRED)
-
-FetchContent_Declare(
-        glfw
-        GIT_REPOSITORY https://github.com/glfw/glfw.git
-        GIT_TAG 3.3.8
-)
-FetchContent_Declare(
-        glm
-        GIT_REPOSITORY https://github.com/g-truc/glm.git
-        GIT_TAG 0.9.9.8
-)
-
-FetchContent_MakeAvailable(glfw glm)
+message(STATUS "Found ASSIMP in ${ASSIMP_INCLUDE_DIR}")
 
 configure_file(configuration/root_directory.h.in configuration/root_directory.h)
 
@@ -40,7 +33,7 @@ endif()
 
 add_executable(OpenGLLearning ${SOURCE_FILES})
 
-target_link_libraries(OpenGLLearning glfw glm ${ASSIMP_LIBRARIES})
+target_link_libraries(OpenGLLearning ${GLFW3_LIBRARY} ${ASSIMP_LIBRARIES})
 
 
 add_custom_target(copy_resources ALL
