@@ -35,6 +35,15 @@ add_executable(OpenGLLearning ${SOURCE_FILES})
 
 target_link_libraries(OpenGLLearning ${GLFW3_LIBRARY} ${ASSIMP_LIBRARIES})
 
+if (APPLE)
+    INCLUDE_DIRECTORIES(/System/Library/Frameworks)
+    FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+    FIND_LIBRARY(OpenGL_LIBRARY OpenGL)
+    FIND_LIBRARY(IOKit_LIBRARY IOKit)
+    FIND_LIBRARY(CoreVideo_LIBRARY CoreVideo)
+    MARK_AS_ADVANCED(COCOA_LIBRARY OpenGL_LIBRARY)
+    target_link_libraries(OpenGLLearning ${COCOA_LIBRARY} ${IOKit_LIBRARY} ${OpenGL_LIBRARY} ${CoreVideo_LIBRARY})
+endif()
 
 add_custom_target(copy_resources ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
