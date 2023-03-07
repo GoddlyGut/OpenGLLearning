@@ -21,7 +21,7 @@ message(STATUS "Found ASSIMP in ${ASSIMP_INCLUDE_DIR}")
 
 
 if(WIN32)
-    set(LIBS glfw3 opengl32 assimp)
+    set(LIBS glfw3 opengl32 ${ASSIMP_LIBRARIES})
     set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-static")
 elseif (APPLE)
     INCLUDE_DIRECTORIES(/System/Library/Frameworks)
@@ -30,7 +30,7 @@ elseif (APPLE)
     FIND_LIBRARY(IOKit_LIBRARY IOKit)
     FIND_LIBRARY(CoreVideo_LIBRARY CoreVideo)
     MARK_AS_ADVANCED(COCOA_LIBRARY OpenGL_LIBRARY)
-    set(LIBS ${LIBS} ${COCOA_LIBRARY} ${IOKit_LIBRARY} ${OpenGL_LIBRARY} ${CoreVideo_LIBRARY})
+    set(LIBS ${LIBS} ${GLFW3_LIBRARY} ${ASSIMP_LIBRARIES} ${COCOA_LIBRARY} ${IOKit_LIBRARY} ${OpenGL_LIBRARY} ${CoreVideo_LIBRARY})
 endif()
 
 
@@ -46,7 +46,7 @@ add_library(GLAD "src/glad.c")
 set(LIBS ${LIBS} GLAD)
 
 add_executable(OpenGLLearning ${SOURCE_FILES})
-target_link_libraries(OpenGLLearning ${LIBS} ${GLFW3_LIBRARY} ${ASSIMP_LIBRARIES})
+target_link_libraries(OpenGLLearning ${LIBS})
 
 add_custom_target(copy_resources ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
