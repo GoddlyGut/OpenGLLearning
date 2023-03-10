@@ -73,6 +73,9 @@ int main()
 
 	// configure global opengl state
 	// -----------------------------
+    glEnable(GL_STENCIL_TEST);
+    glStencilMask(0xFF);
+    glStencilMask(0x00);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS); // always pass the depth test (same effect as glDisable(GL_DEPTH_TEST))
 
@@ -188,7 +191,7 @@ int main()
 		// render
 		// ------
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_TEST);
 
 		shader.use();
 		glm::mat4 model = glm::mat4(1.0f);
