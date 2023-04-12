@@ -4,7 +4,7 @@
       "name": "x64-Debug",
       "generator": "Ninja",
       "configurationType": "Debug",
-      "buildRoot": "${projectDir}\\cmake-build-debug",
+      "buildRoot": "${projectDir}\\\\cmake-build-debug",
       "installRoot": "${projectDir}\\cmake-build-debug",
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
